@@ -64,9 +64,13 @@ Many things are possible with these hooks. The hooks `mm_ajax_login_before_form_
 
 == Frequently Asked Questions ==
 
+= Can I use any selector I want? =
+
+Yes! The included filter `mm_ajax_login_trigger_selector` allows you to specify any custom selector you want as a string. The default value is `.ajax-login-trigger`.
+
 = Can the form be styled? =
 
-Yes! The default CSS is designed to be minimal and work with the existing styles included in your theme, but you can write addition CSS to take full control over the look of the form.
+Yes! The default CSS is designed to be minimal and work with the existing styles included in your theme, but you can write additional CSS to take full control over the lightbox and form.
 
 == Screenshots ==
 
