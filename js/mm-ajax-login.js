@@ -5,14 +5,13 @@
 ( function( $ ) {
 
 	var selector = mm_ajax_login_vars.selector;
+
 	// Open the ajax modal when a trigger link is clicked.
 	$( selector ).on( 'click', function( event ) {
 		event.preventDefault();
 
 		// Store the url to redirect to after login.
-		var redirectUrl = $( this ).attr( 'href' );
-
-
+		var redirectUrl = ( $( this ).attr( 'href' ) ) ? $( this ).attr( 'href' ) : '';
 
 		// Check whether the user is logged in and proceed from there.
 		mmAjaxLoginCheckIsUserLoggedIn( redirectUrl );
@@ -83,6 +82,8 @@
 					 0 === redirectUrl.lastIndexOf( '/', 0 ) ||
 					 0 === redirectUrl.lastIndexOf( '#', 0 ) ) {
 					window.location.href = redirectUrl;
+				} else {
+					window.location.reload();
 				}
 			} else {
 				mmAjaxLoginShowLoginForm( redirectUrl );
@@ -136,6 +137,8 @@
 					 0 === redirectUrl.lastIndexOf( '/', 0 ) ||
 					 0 === redirectUrl.lastIndexOf( '#', 0 ) ) {
 					window.location.href = redirectUrl;
+				} else {
+					window.location.reload();
 				}
 			}
 		});
