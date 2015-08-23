@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 define( 'MM_AJAX_LOGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'MM_AJAX_LOGIN_VERSION', '1.0.0' );
 
+add_action( 'plugins_loaded', 'mm_ajax_login_load_textdomain' );
+/**
+ * Load the text domain.
+ */
+function mm_ajax_login_load_textdomain() {
+	load_plugin_textdomain( 'mm-ajax-login', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+
 /**
  * If we're on the front end, set up our front-end hooks.
  */
