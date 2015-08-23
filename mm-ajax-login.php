@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Mm Ajax Login
- * Plugin URI: http://mightyminnow.com
- * Description: A custom lightbox login form that uses ajax and can be triggered by clicking any link with the class "ajax-login-trigger"
+ * Plugin URI: https://wordpress.org/plugins/mm-ajax-login/
+ * Description: A custom lightbox login form that serves as a gatekeeper for links with the class "ajax-login-trigger"
  * Version: 1.0.0
  * Author: MIGHTYminnow, Braad Martin
  * Author URI: http://mightyminnow.com
