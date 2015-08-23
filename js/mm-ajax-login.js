@@ -4,52 +4,46 @@
 
 ( function( $ ) {
 
-	// Grab the trigger selector.
 	var selector = mm_ajax_login_vars.selector;
-
 	// Open the ajax modal when a trigger link is clicked.
 	$( selector ).on( 'click', function( event ) {
-
-		// Don't follow the link if our class is on an anchor.
 		event.preventDefault();
 
-		// Store the url to redirect to after login
+		// Store the url to redirect to after login.
 		var redirectUrl = $( this ).attr( 'href' );
 
 		// Check whether the user is logged in and proceed from there.
 		mmAjaxLoginCheckIsUserLoggedIn( redirectUrl );
 	});
 
-	// Close the ajax modal when either the close button or the overlay is clicked.
+	// Close the ajax modal when the close button or overlay is clicked or when the user hits esc.
 	$( '.mm-ajax-login, .mm-ajax-login .close-button' ).on( 'click keyup', function( event ) {
-
 		if ( event.target == this || event.target.className == 'close-button' || event.keyCode == 27 ) {
 			$( this ).removeClass( 'open visible' );
 			$( '.mm-ajax-login-inner' ).removeClass( 'visible' );
 		}
 	});
 
-	// Trigger the form to submit when the Login button is clicked.
-	// We need to do this manually rather than use <input type="submit" />
-	// in the form because we want to allow extra inputs to be added
-	// that might inject custom data into the form before submitting.
+	// Call our form trigger function when the login button is clicked or when the user hits enter.
+	// We need to do this manually rather than use input type="submit" in the form because
+	// we want to allow extra inputs to be added that might inject custom data into the form
+	// before submitting.
 	$( '#mm-ajax-login-submit-button' ).on( 'click', mmAjaxLoginSubmitForm );
+	$( '#mm-ajax-login-form input' ).on( 'keypress', function( e ) {
+		if ( e.keyCode == 13 ) {
+			mmAjaxLoginSubmitForm();
+		}
+	});
 
-	// Submit the form via AJAX.
-	$( '#mm-ajax-login-form' ).on( 'submit', mmAjaxLoginDoAjax );
-
-	// Function to trigger form submission.
+	// Trigger the form submission.
 	function mmAjaxLoginSubmitForm() {
 		$( '#mm-ajax-login-form' ).trigger( 'submit' );
 	}
 
 	// Function to do the vertical centering.
 	function mmAjaxLoginVerticalCenter( selector, offset ) {
-
-		// Scope the vars.
 		var $this, parentHeight, marginTop;
 
-		// Store the passed in selector.
 		$this = $( selector );
 
 		// Grab the wrapper's height.
@@ -63,9 +57,8 @@
 		$this.css( 'margin-top', marginTop ).addClass( 'visible' );
 	}
 
-	// Check whether the user is currently logged in.
+	// Check whether the user is logged in.
 	function mmAjaxLoginCheckIsUserLoggedIn( redirectUrl ) {
-
 		var nonce, data;
 
 		// Grab the nonce value from the form.
@@ -90,21 +83,13 @@
 		});
 	}
 
+	// Show the login form.
 	function mmAjaxLoginShowLoginForm( redirectUrl ) {
-
-		// Store the ajax modal DOM reference.
 		var $modal = $( '.mm-ajax-login' );
 
-		// Position the ajax modal overlay.
 		$modal.addClass( 'open' );
-
-		// Vertically-center the ajax modal.
 		mmAjaxLoginVerticalCenter( '.mm-ajax-login-inner', 0 );
-
-		// Fade in the login modal.
 		$modal.addClass( 'visible' );
-
-		// Bring focus to the ajax input.
 		$modal.find( 'input[type="text"]' ).focus();
 
 		// Store the redirect URL in the form.
@@ -113,8 +98,6 @@
 
 	// Attempt to sign the user in.
 	function mmAjaxLoginDoAjax( event ) {
-
-		// Prevent normal form submission behavior.
 		event.preventDefault();
 
 		// Update the status message.
@@ -125,9 +108,9 @@
 
 		// Build our AJAX data.
 		var data = {
-			'action'   : 'mm_do_ajax_login',
-			'data'     : $( '#mm-ajax-login-form' ).serialize(),
-			'nonce'    : $( '#mm-ajax-login-form #_wpnonce' ).attr( 'value' )
+			'action' : 'mm_do_ajax_login',
+			'data'   : $( '#mm-ajax-login-form' ).serialize(),
+			'nonce'  : $( '#mm-ajax-login-form #_wpnonce' ).attr( 'value' )
 		}
 
 		// Make the AJAX request.
@@ -146,5 +129,6 @@
 		});
 	}
 
+	// Submit the form via AJAX.
+	$( '#mm-ajax-login-form' ).on( 'submit', mmAjaxLoginDoAjax );
 })( jQuery );
-
