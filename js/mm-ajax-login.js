@@ -77,6 +77,7 @@
 			// If the user is already logged in, follow the clicked link,
 			// otherwise show the login form.
 			if ( response == 'yes' ) {
+
 				// Only do it if the URL is legit.
 				if ( 0 === redirectUrl.lastIndexOf( 'http', 0 ) ||
 					 0 === redirectUrl.lastIndexOf( '/', 0 ) ||
@@ -132,6 +133,7 @@
 
 			// Redirect if login was successful.
 			if ( true === responseObj.logged_in ) {
+
 				// Only do it if the URL is legit.
 				if ( 0 === redirectUrl.lastIndexOf( 'http', 0 ) ||
 					 0 === redirectUrl.lastIndexOf( '/', 0 ) ||
