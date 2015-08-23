@@ -65,6 +65,10 @@
 	padding-top: 20px;
 }
 
+#mm-ajax-login-form p.login-buttons {
+	margin-bottom: 0;
+}
+
 .mm-ajax-login-form-title,
 #mm-ajax-login-status {
 	margin-bottom: 10px;
