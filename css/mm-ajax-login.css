@@ -67,6 +67,7 @@
 }
 
 .mm-ajax-login-form-title {
+	margin-top: 0;
 	margin-bottom: 10px;
 	clear: none;
 }
