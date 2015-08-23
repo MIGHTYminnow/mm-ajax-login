@@ -23,16 +23,16 @@ define( 'MM_AJAX_LOGIN_VERSION', '1.0.0' );
 if ( ! is_admin() ) {
 
 	add_action( 'wp_enqueue_scripts', 'mm_ajax_login_enqueue_scripts' );
-	add_action( 'wp_footer', 'mm_output_ajax_login' );
+	add_action( 'wp_footer', 'mm_ajax_login_output_form' );
 }
 
 /**
  * Set up our ajax hooks.
  */
-add_action( 'wp_ajax_mm_is_user_logged_in', 'mm_ajax_check_user_logged_in' );
-add_action( 'wp_ajax_nopriv_mm_is_user_logged_in', 'mm_ajax_check_user_logged_in' );
-add_action( 'wp_ajax_mm_do_ajax_login', 'mm_ajax_process_form_submission' );
-add_action( 'wp_ajax_nopriv_mm_do_ajax_login', 'mm_ajax_process_form_submission' );
+add_action( 'wp_ajax_mm_is_user_logged_in', 'mm_ajax_login_check_user_logged_in' );
+add_action( 'wp_ajax_nopriv_mm_is_user_logged_in', 'mm_ajax_login_check_user_logged_in' );
+add_action( 'wp_ajax_mm_do_ajax_login', 'mm_ajax_login_process_form_submission' );
+add_action( 'wp_ajax_nopriv_mm_do_ajax_login', 'mm_ajax_login_process_form_submission' );
 
 /**
  * Enqueue our CSS and JS.
@@ -85,7 +85,7 @@ function mm_ajax_login_enqueue_scripts() {
  *
  * @since  1.0.0
  */
-function mm_output_ajax_login() {
+function mm_ajax_login_output_form() {
 
 	// Allow our strings to be filtered.
 	$form_title = apply_filters( 'mm_ajax_login_form_title', __( 'Site Login', 'mm-ajax-login' ) );
@@ -137,7 +137,7 @@ function mm_output_ajax_login() {
  *
  * @since  1.0.0
  */
-function mm_ajax_check_user_logged_in() {
+function mm_ajax_login_check_user_logged_in() {
 
 	// Confirm that the nonce is there and valid, bail if it's not.
 	check_ajax_referer( 'mm-ajax-login-nonce', 'nonce', true );
@@ -156,7 +156,7 @@ function mm_ajax_check_user_logged_in() {
  *
  * @since  1.0.0
  */
-function mm_ajax_process_form_submission() {
+function mm_ajax_login_process_form_submission() {
 
 	// Confirm that the nonce is there and valid, bail if it's not.
 	check_ajax_referer( 'mm-ajax-login-nonce', 'nonce', true );
@@ -183,18 +183,18 @@ function mm_ajax_process_form_submission() {
 		$password = $data['password'];
 		$remember = ( ! empty( $data['rememberme'] ) ) ? $data['rememberme'] : false;
 
-		mm_ajax_login_user( $username, $password, $remember );
+		mm_ajax_login_log_in_user( $username, $password, $remember );
 	}
 
 	wp_die();
 }
 
 /**
- * Login the user.
+ * Log in the user.
  *
  * @since  1.0.0
  */
-function mm_ajax_login_user( $username, $password, $remember ) {
+function mm_ajax_login_log_in_user( $username, $password, $remember ) {
 
 	// Allow our return messages to be filtered.
 	$email_login_fail_message = apply_filters( 'mm_ajax_login_email_login_fail_message', __( 'The e-mail address you entered does not match a current user.', 'mm-ajax-login' ) );
