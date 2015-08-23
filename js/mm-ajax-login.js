@@ -12,6 +12,8 @@
 		// Store the url to redirect to after login.
 		var redirectUrl = $( this ).attr( 'href' );
 
+
+
 		// Check whether the user is logged in and proceed from there.
 		mmAjaxLoginCheckIsUserLoggedIn( redirectUrl );
 	});
@@ -76,7 +78,12 @@
 			// If the user is already logged in, follow the clicked link,
 			// otherwise show the login form.
 			if ( response == 'yes' ) {
-				window.location.href = redirectUrl;
+				// Only do it if the URL is legit.
+				if ( 0 === redirectUrl.lastIndexOf( 'http', 0 ) ||
+					 0 === redirectUrl.lastIndexOf( '/', 0 ) ||
+					 0 === redirectUrl.lastIndexOf( '#', 0 ) ) {
+					window.location.href = redirectUrl;
+				}
 			} else {
 				mmAjaxLoginShowLoginForm( redirectUrl );
 			}
@@ -124,7 +131,12 @@
 
 			// Redirect if login was successful.
 			if ( true === responseObj.logged_in ) {
-				window.location.href = redirectUrl;
+				// Only do it if the URL is legit.
+				if ( 0 === redirectUrl.lastIndexOf( 'http', 0 ) ||
+					 0 === redirectUrl.lastIndexOf( '/', 0 ) ||
+					 0 === redirectUrl.lastIndexOf( '#', 0 ) ) {
+					window.location.href = redirectUrl;
+				}
 			}
 		});
 	}
