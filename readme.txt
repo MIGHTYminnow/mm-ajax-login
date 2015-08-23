@@ -14,13 +14,13 @@ A custom lightbox login form that serves as a gatekeeper for links with the clas
 
 This plugin allows you to create special links that check whether a user is logged in and then follow the link if they are or show an ajax-powered login form in a simple lightbox if they are not. Once the user fills out the login form with valid credentials they will be logged in and redirected to the page the link points to.
 
-= Example =
+= Scenario =
 
-Let's say you've got a page on your site 'My Account' that only logged in users are able to access. It could be a private page or ideally it is a page that is set up to show a standard login form to users that are not logged in. With this plugin you could add the class 'ajax-login-trigger' to all the links that point to that page, then when a user clicks one of these links an ajax request is sent to the server to check whether the user is already logged in, and if they are the user is redirected to the page without ever noticing that the login check was done or if they aren't logged in they'll see a login form appear in a simple lightbox. When the user fills out the form, a second ajax request is sent to the server to attempt to log them in, and if successful the user is redirected to the page.
+Let's say you've got a page on your site that only logged in users are able to access. It could be a private page or ideally it is a page that is set up to show a standard login form to users who are not logged in. With this plugin you could add the class 'ajax-login-trigger' to all the links that point to that page, then when a user clicks one of these links an ajax request is sent to the server to check whether the user is already logged in, and if they are the user is redirected to the page without ever noticing that the login check was done, or if they aren't logged in they'll see a login form appear in a simple lightbox. When the user fills out the form, a second ajax request is sent to the server to attempt to log them in, and if successful the user is redirected to the page.
 
 = Customize It! =
 
-This plugin includes a bunch of hooks and filters that allow for all sorts of customizations and unique use cases. Here's a quick list:
+This plugin includes lots of hooks and filters that allow for all sorts of customizations and unique use cases. Here's a quick list:
 
 Actions:
 
@@ -98,7 +98,9 @@ Yes! The default CSS is designed to be minimal and work with the existing styles
 
 == Screenshots ==
 
-Coming Soon...
+1. The login form in twentyfifteen
+2. The login form in twentyfourteen
+3. The login form in twentytwelve
 
 == Changelog ==
 
